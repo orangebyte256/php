@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+	<head>
+        <meta charset="utf-8">	
+		<title>Matrix code rain</title>
+		<link rel="stylesheet" href="style.css">		
+	</head>
+	
+	<body>	
+		<div id="main" style="position:absolute; z-index: 1000; margin-top: 50px; background-color: #000000; width: 600px; height: 400px; opacity: 0.95;">
+		<center>Ну так что, готов узнать, насколько глубока кроличья нора?</center><br>
+<form method = "POST">
+	<p>Найди себя</p>
+    <select required size = "1" name = "name[]">
+	<?php
+	$handle = fopen("./students.txt", "r");
+	$num = 0;
+	if ($handle) 
+	{
+    		while (($line = fgets($handle)) !== false) 
+		{
+			echo "<option value = ''>";
+			echo $line;
+			echo "</option>";
+ 	   	}
+    		fclose($handle);
+	}
+	?>
+    </select>
+    <input type = "submit" value = "Ok">
+</form>
+		</div>
+		<script type="text/JavaScript">
+		var num = Math.floor((window.innerWidth || document.body.clientWidth) / 2 - 300);
+		document.getElementById('main').style.marginLeft = num.toString() + "px";
+		</script>
+		<canvas id="canvas"></canvas>
+		<script src="stats.min.js"></script>
+		<script src="script.js"></script>
+
+	</body>
+	
+</html>
