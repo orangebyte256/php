@@ -5,6 +5,10 @@
 // fixes from Paul Irish and Tino Zijdel
  
 (function() {
+	var num = Math.floor((window.innerWidth || document.body.clientWidth) / 2 - 300);
+	document.getElementById('main').style.marginLeft = num.toString() + "px";
+
+
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -126,6 +130,9 @@ var M = {
 			M.WIDTH = window.innerWidth;
 			M.HEIGHT = window.innerHeight;
 			M.init();
+
+			var num = Math.floor((window.innerWidth || document.body.clientWidth) / 2 - 300);
+			document.getElementById('main').style.marginLeft = num.toString() + "px";
 		};
 	},
 

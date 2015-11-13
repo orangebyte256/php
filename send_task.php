@@ -1,66 +1,8 @@
 <?php
 
-$task_count = 1;
-function get_name($id)
-{
-	$handle = fopen("./students.txt", "r");
-	$num = 0;
-	for ($i = 0; $i <= $id; $i++)
-	{
-		$line = fgets($handle);
-	}
-	fclose($handle);
-	return $line;
-}
+include 'functions.php';
 
-function get_id($name)
-{
-	$handle = fopen("./students.txt", "r");
-	$num = 0;
-	while (($line = fgets($handle)) !== false) 
-	{
-		if($line == $name)
-		{
-			fclose($handle);
-			return $num;
-		}
-		$num = $num + 1;
-	}
-	return 0;
-}
-
-function is_belong_to_fit($name)
-{
-	$handle = fopen("./fit_students.txt", "r");
-	while (($line = fgets($handle)) !== false) 
-	{
-		if($line == $name)
-		{
-			fclose($handle);
-			return true;
-		}
-	}
-	return false;
-}
-
-function make_select($name)
-{
-	$handle = fopen($name, "r");
-	if ($handle) 
-	{
-		while (($line = fgets($handle)) !== false) 
-		{
-			echo '<option value = "';
-			echo get_id($line);
-			echo '">';
-			echo $line;
-			echo "</option>";
- 	   	}
-		fclose($handle);
-	}
-}
 ?>
-
 
 <!doctype html>
 <html>
@@ -76,7 +18,7 @@ function make_select($name)
 		<div style="margin-top: 20px; margin-left: 20px; margin-right: 20px; margin-bottom: 20px; line-height: 22px; ">
 		<font id="text_task" size="5" color="green"></font>
 		<center><font id="text_link">
-		<a href="./task_<?php echo $_GET["first"] % $task_count; ?>.html" onclick="this.target='_blank';" style="color:green;">условие задачи</a>
+		<a href="./task_<?php echo get_task_num($_GET["first"]); ?>.html" onclick="this.target='_blank';" style="color:green;">условие задачи</a>
 		</font></center>
 		</div>
 		<center>
@@ -84,16 +26,12 @@ function make_select($name)
 		<input type="file" name="datafile" size="400">
 		<input type="hidden" name="first" value=<?php echo $_GET["first"]; ?>>
 		<input type="hidden" name="second" value=<?php echo $_GET["second"]; ?>>
-		<input type="hidden" name="task" value=<?php echo $_GET["first"] % $task_count; ?>>
+		<input type="hidden" name="task" value=<?php echo get_task_num($_GET["first"]); ?>>
 		<input type="submit" value="Send">
 		</form>
-		<p><?php echo $_GET['result'] ?></p>
+		<font size="5" color="red"><br><?php echo $_GET['result'] ?></font>
 		</center>
 		</div>
-		<script type="text/JavaScript">
-		var num = Math.floor((window.innerWidth || document.body.clientWidth) / 2 - 300);
-		document.getElementById('main').style.marginLeft = num.toString() + "px";
-		</script>
 		<canvas id="canvas"></canvas>
 		<script src="stats.min.js"></script>
 		<script src="script.js"></script>
